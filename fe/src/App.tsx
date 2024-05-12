@@ -1,3 +1,13 @@
+import { GlobalStyles } from "./styles/GlobalStyles"
+
+
 export function App(){
-  return <h1>Olá Pessoal</h1>
+  return(
+
+  <>
+      <GlobalStyles/>
+      <h1>OLá Pessola </h1>
+
+  </>
+  )
 }
