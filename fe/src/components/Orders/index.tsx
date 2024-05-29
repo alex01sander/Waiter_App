@@ -11,8 +11,8 @@ const orders: Order[] = [{
         {
             "product": {
                 "name": "Pizza Quatro Queijos",
-                "imagePath": "1715023697482-quatro-queijos.png",
-                "price": 20,  // Corrigir "Price" para "price"
+                "imagePath": "1715024055365-quatro-queijos.png",
+                "price": 20,
 
             },
             "quantity": 2,
@@ -20,13 +20,13 @@ const orders: Order[] = [{
         },
         {
             "product": {
-                "name": "Pizza Quatro Queijos",
-                "imagePath": "1715023697482-quatro-queijos.png",
-                "price": 20,  // Corrigir "Price" para "price"
+                "name": "Cerveja",
+                "imagePath": "1715025541407-cerveja.png",
+                "price": 60,
 
             },
-            "quantity": 2,
-            "_id": "66510a9ee6de4917b463c186"
+            "quantity": 5,
+            "_id": "66510a9ee6de4917b463c187"
         },
     ]
 }];
