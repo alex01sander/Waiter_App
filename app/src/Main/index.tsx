@@ -1,10 +1,12 @@
+import { Button } from "../components/Button";
 import { Categories } from "../components/Categories";
 import { Header } from "../components/Header";
 import { Menu } from "../components/Menu";
-import { Text } from "../components/Text";
 import { Container, CategoriesContainer, MenuContainer, Footer, FooterContainer } from "./styles";
 
 export function Main(){
+
+
     return (
        <>
         <Container>
@@ -20,7 +22,11 @@ export function Main(){
 
             </Container>
             <Footer>
-                <FooterContainer></FooterContainer>
+                <FooterContainer>
+                    <Button onPress={() =>  alert('Novo Pedido')} disabled>
+                        Novo Pedido
+                    </Button>
+                </FooterContainer>
             </Footer>
        </>
     )
