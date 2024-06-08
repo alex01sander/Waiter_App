@@ -15,10 +15,17 @@ export function Main() {
         setIsTableModalVisible(false);
     }
 
+    function handleCancelOrder(){
+        setSelectedTable('')
+    }
+
     return (
         <>
             <Container>
-                <Header />
+                <Header
+                    setSelectedTable={selectedTable}
+                    onCancelOrder={handleCancelOrder}
+                />
 
                 <CategoriesContainer>
                     <Categories />
