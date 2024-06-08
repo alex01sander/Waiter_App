@@ -4,7 +4,7 @@ import { Text } from "../../components/Text";
 interface ButtonProps {
   children: string;
   onPress: () => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function Button({ children, onPress, disabled }: ButtonProps) {
