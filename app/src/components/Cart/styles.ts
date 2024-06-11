@@ -31,5 +31,13 @@ export const QuantityContainer = styled.View`
 export const ProductsDetasils = styled.View`
 
 `
-
+export const Summary = styled.View`
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`
+export const TotalContainer = styled.View`
+    margin-right: 32px;
+    flex:1;
+`
 
