@@ -1,5 +1,6 @@
 import { ActivityIndicator } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Button } from "../components/Button";
 import { Categories } from "../components/Categories";
@@ -8,11 +9,16 @@ import { Menu } from "../components/Menu";
 import { TableModal } from "../components/TableModal";
 import { Cart } from "../components/Cart";
 import { Text } from "../components/Text";
+import { Empty } from "../components/Icons/Empty";
 
 import { CartItem } from "../types/CartItem";
 import { Product } from "../types/Product";
+import { Category } from "../types/Category";
 
-import { products as mockProducts} from '../mocks/products'
+// import {products as mocksPorducts} from '../mocks/products'
+// import {categories as mockCategories} from '../mocks/categories'
+
+import { api } from "../utils/api";
 
 import { Container,
     CategoriesContainer,
@@ -21,14 +27,28 @@ import { Container,
     FooterContainer,
 CenteredContainer
 } from "./styles";
-import { Empty } from "../components/Icons/Empty";
 
 export function Main() {
     const [selectedTable, setSelectedTable] = useState('');
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [cartItems, setCartItems] = useState<CartItem[]>([])
-    const [isLoading] = useState(false)
-    const [products] = useState<Product[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [products, setProducts] = useState<Product[]>([])
+    const [categories, setCategories] = useState<Category[]>([])
+
+    useEffect(() => {
+
+		Promise.all([
+			api.get('/categories'),
+            api.get('/products'),
+		]).then(([categoriesResponse, productsResponse]) => {
+			setProducts(productsResponse.data)
+			setCategories(categoriesResponse.data)
+			setIsLoading(false)
+		})
+	}, [])
+
+
 
     function handleSaveTable(table: string) {
         setSelectedTable(table);
@@ -109,7 +129,7 @@ export function Main() {
                 {!isLoading && (
                     <>
                         <CategoriesContainer>
-                            <Categories />
+                            <Categories  categories={categories}/>
                         </CategoriesContainer>
 
                        {products.length > 0 ? (
