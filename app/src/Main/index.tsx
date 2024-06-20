@@ -35,6 +35,7 @@ export function Main() {
     const [isLoading, setIsLoading] = useState(true)
     const [products, setProducts] = useState<Product[]>([])
     const [categories, setCategories] = useState<Category[]>([])
+    const [isLoadingProducts, setIsLoadingProducts] = useState(false)
 
     useEffect(() => {
 
@@ -110,7 +111,19 @@ export function Main() {
         })
     }
 
+    async function handleSelectCategory(categoryId: string){
+        const route = !categoryId
+        ? '/products'
+        : `/categories/${categoryId}/products`
 
+        setIsLoadingProducts(true)
+
+       const {data} = await api.get(route)
+
+
+       setProducts(data)
+       setIsLoadingProducts(false)
+    }
 
     return (
         <>
@@ -129,10 +142,19 @@ export function Main() {
                 {!isLoading && (
                     <>
                         <CategoriesContainer>
-                            <Categories  categories={categories}/>
+                            <Categories
+                             categories={categories}
+                             onSelectCategory={handleSelectCategory}
+                            />
                         </CategoriesContainer>
 
-                       {products.length > 0 ? (
+                        {isLoadingProducts ? (
+                            <CenteredContainer>
+                            <ActivityIndicator color='#d73035' size='large'/>
+                        </CenteredContainer>
+                        ): (
+                            <>
+                                {products.length > 0 ? (
                             <MenuContainer>
                                 <Menu
                                     onAddToCart={handleAddToCart}
@@ -145,6 +167,10 @@ export function Main() {
                             <Text color='#666' style={{marginTop: 24}}> Nenhum produto foi encontrado!</Text>
                         </CenteredContainer>
                        )}
+                            </>
+                        ) }
+
+
                     </>
                 )}
             </Container>
@@ -164,6 +190,7 @@ export function Main() {
                         onAdd={handleAddToCart}
                         onDecrement={handleDecrementCartItem}
                         onCorfirmOrder={handleResetOrder}
+                        selectedTable={selectedTable}
                         />
                     )}
                 </FooterContainer>
